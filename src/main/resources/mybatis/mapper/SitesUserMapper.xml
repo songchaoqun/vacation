@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.SitesUserMapper" >
+    <!-- 查询网站用户列表 并分页 -->
+    <select id="querySitesUser" resultType="com.lyq.model.SitesUser">
+        select t.*,t.sites_name as sitesName,t.sites_phone as sitesPhone,t.sites_user_name as sitesUserName from t_sites_user t where t.state = 1
+    </select>
+    <!-- 新增网站用户 -->
+    <insert id="addSitesUser" parameterType="com.lyq.model.SitesUser">
+        insert into t_sites_user
+        (id,password,sites_name,sites_phone,state,sites_user_name)
+        values
+        (#{id},#{password},#{sitesName},#{sitesPhone},1,#{sitesUserName})
+    </insert>
+    <!-- 删除网站用户 逻辑删 -->
+    <update id="deleteSitesUser" parameterType="com.lyq.model.SitesUser">
+        update t_sites_user set state = 0 where id = #{id}
+    </update>
+    <!-- 修改回显 -->
+    <select id="querySitesUserList" resultType="com.lyq.model.SitesUser" parameterType="com.lyq.model.SitesUser">
+        select t.*,t.sites_name as sitesName,t.sites_phone as sitesPhone,t.sites_user_name as sitesUserName from t_sites_user t where t.id = #{id}
+    </select>
+    <!-- 修改网站用户 -->
+    <update id="updateSitesUser" parameterType="com.lyq.model.SitesUser">
+        update t_sites_user set sites_name = #{sitesName},sites_phone = #{sitesPhone},password=#{password},sites_user_name=#{sitesUserName}
+        where id = #{id}
+    </update>
+    <!-- 回收站 查询被删除的网站用户 -->
+    <select id="queryRecycleSitesUser" resultType="com.lyq.model.SitesUser">
+        select t.*,t.sites_name as sitesName,t.sites_phone as sitesPhone,t.sites_user_name as sitesUserName from t_sites_user t where t.state = 0
+    </select>
+</mapper>

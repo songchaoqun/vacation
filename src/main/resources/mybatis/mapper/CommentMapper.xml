@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.CommentMapper" >
+    <!-- 新增评论 -->
+    <insert id="addComment" parameterType="com.lyq.model.Comment">
+        insert into t_comment
+        (id,catalog_id,comment_time,content,sites_id,status)
+        values
+        (#{id},#{catalogId},SYSDATE(),#{content},#{sitesId},0)
+    </insert>
+    <!-- 修改回显评论 -->
+    <select id="queryCommentById" parameterType="com.lyq.model.Comment" resultType="com.lyq.model.Comment">
+        select t.*,t.catalog_id as catalogId,t.sites_id as sitesId from t_comment t
+    </select>
+    <!-- 修改评论 -->
+    <update id="updateComment" parameterType="com.lyq.model.Comment">
+        update t_comment set catalog_id = #{catalogId},comment_time = SYSDATE(),content = #{content},sites_id = #{sitesId}
+        where id = #{id}
+    </update>
+    <!-- 查询评论 -->
+    <select id="queryComment" resultType="com.lyq.model.Comment">
+        select t.*,t.catalog_id as catalogId,t.sites_id as sitesId,t.comment_time as commentTime from t_comment t where t.status = 0
+    </select>
+    <!-- 删除评论 -->
+    <update id="deleteComment" parameterType="com.lyq.model.Comment">
+        update t_comment set status = 1 where id = #{id}
+    </update>
+</mapper>

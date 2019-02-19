@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.TreeMapper" >
+    <!-- 映射员工角色中间表 -->
+    <resultMap type="com.lyq.model.RoleTree" id="getRoleTree">
+        <id property="id" column="id"/>
+        <result property="roleId" column="role_id"></result>
+        <result property="treeId" column="tree_id"></result>
+    </resultMap>
+    <!-- 查询页面树 -->
+    <select id="queryTreeList" resultType="com.lyq.model.Tree">
+        select * from t_tree where pid = #{id}
+    </select>
+    <!-- 角色拥有的权限 -->
+    <select id="queryRoleList" parameterType="Integer" resultMap="getRoleTree">
+        select * from t_role_tree where role_id = #{id}
+    </select>
+    <!-- 新增权限树 -->
+    <insert id="addTree">
+        insert into t_tree
+        (id,pid,text,url)
+        values
+        (#{id},#{pid},#{text},#{url})
+    </insert>
+    <!-- 查看该权限是否让选中-->
+    <select id="queryRoleTree" resultType="java.lang.Long" parameterType="java.util.List">
+        select count(*) from t_role_tree where tree_id in
+        <foreach collection="list" item="arr" index="index" separator="," open="(" close=")">
+            #{arr}
+        </foreach>
+    </select>
+    <!-- 删除选中的节点 包含他下面的子节点 -->
+    <delete id="deleteTreeById" parameterType="java.util.List">
+        delete from t_tree where id in
+        <foreach collection="list" item="arr" index="index" separator="," open="(" close=")">
+            #{arr}
+        </foreach>
+    </delete>
+    <!-- 绑定角色权限 -->
+    <insert id="addRoleTree">
+        insert into t_role_tree
+        (role_id,tree_id)
+        values
+        <foreach collection="split" item="split" separator=",">
+            (#{id},#{split})
+        </foreach>
+    </insert>
+    <!-- 删除原有的权限 -->
+    <delete id="deleteTreeRoleId" parameterType="Integer">
+        delete from t_role_tree where role_id = #{id}
+    </delete>
+    <!-- 查询当前ID下的自己的父级id -->
+    <select id="queryTreeRoleList" resultType="com.lyq.model.Tree">
+        select * from t_tree where id in (${id})
+    </select>
+    <!-- 查询当前ID下的上级id -->
+    <select id="queryRoleTreePids" resultType="com.lyq.model.Tree">
+        select * from t_tree where pid in
+        <foreach collection="id" item="id" index="index" separator="," open="(" close=")">
+            #{id.pid}
+        </foreach>
+    </select>
+</mapper>

@@ -1,0 +1,31 @@
+#配置访问路劲以及端口号 防止冲突
+server:
+  servlet:
+    context-path: /lyq
+  port: 8081
+#  配置mysql连接数据库
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/vacation?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+  #  配置jpa自动生成表
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  #  配置jsp页面
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/config.xml
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

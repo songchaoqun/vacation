@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.ProblemMapper" >
+    <!-- 查询所有问题 -->
+    <select id="queryProblem" resultType="com.lyq.model.Problem">
+        select t.*,t.problem_name as problemName,t.problem_create_time as problemCreateTime,t.sites_id as sitesId from t_problem t
+    </select>
+    <!-- 新增问题 -->
+    <insert id="addProblem" parameterType="com.lyq.model.Problem">
+        insert into t_problem
+        (id,hottest,problem_create_time,problem_name,sites_id)
+        values
+        (#{id},#{hottest},SYSDATE(),#{problemName},#{sitesId})
+    </insert>
+    <!-- 删除问题 -->
+    <delete id="deleteProblem" parameterType="com.lyq.model.Problem">
+        delete from t_problem where id =#{id}
+    </delete>
+</mapper>

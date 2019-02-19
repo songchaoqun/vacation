@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.StaffRoleMapper" >
+
+    <!-- 映射员工角色中间表 -->
+    <resultMap type="com.lyq.model.RoleStaff" id="getRoleStaff">
+        <id property="id" column="id"/>
+        <result property="roleId" column="roleid"></result>
+        <result property="staffId" column="staffid"></result>
+    </resultMap>
+    <!-- 新增员工角色 -->
+    <insert id="addStaffRole" parameterType="com.lyq.model.StaffRole">
+        insert into t_staff_role
+        (id,name)
+        values
+        (#{id},#{name})
+    </insert>
+    <!-- 先查询该角色有没有被使用 被使用不可删除 -->
+    <select id="queryRoleStaff" resultMap="getRoleStaff" parameterType="Integer">
+        select * from role_staff where roleid = #{id}
+    </select>
+    <!-- 删除员工角色 -->
+    <delete id="deleteStaffRole" parameterType="Integer">
+        delete from t_staff_role where id = #{id}
+    </delete>
+    <!-- 查询角色 -->
+    <select id="queryStaffRoleList" resultType="com.lyq.model.StaffRole">
+        select * from t_staff_role
+    </select>
+    <!-- 删除该角色绑定的权限 -->
+    <delete id="deleteTreeRole" parameterType="Integer">
+        delete from t_role_tree where role_id = #{id}
+    </delete>
+</mapper>

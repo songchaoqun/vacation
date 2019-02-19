@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.CatalogMapper" >
+    <!-- 查询所有目录信息 -->
+    <select id="queryCatalog" resultType="com.lyq.model.Catalog" parameterType="Integer">
+        select t.*,t.mold_name as moldName,t.mold_url as moldUrl,c.content as courseName from t_catalog t,t_course c where t.course_id = c.id and t.pid = #{i}
+    </select>
+    <!-- 新增目录信息 -->
+    <insert id="addCatalog">
+        insert into t_catalog
+        (id,mold_name,mold_url,pid,course_id)
+        values
+        (#{id},#{moldName},#{moldUrl},#{pid},#{courseId})
+    </insert>
+    <!-- 删除目录信息 -->
+    <delete id="deleteCatalog" parameterType="java.util.List">
+        delete from t_catalog where id in
+        <foreach collection="list" item="arr" index="index" separator="," open="(" close=")">
+            #{arr}
+        </foreach>
+    </delete>
+    <!-- 查询要删除的目录下的所有子节点 -->
+    <select id="queryCatalogList" resultType="com.lyq.model.Catalog" parameterType="Integer">
+        select * from t_catalog t where t.pid = #{id}
+    </select>
+    <!-- 查询主目录 -->
+    <select id="queryHostCatalog" resultType="com.lyq.model.Catalog" parameterType="Integer">
+        select t.*,t.mold_name as moldName,t.mold_url as moldUrl from t_catalog t where t.pid = #{i}
+    </select>
+</mapper>

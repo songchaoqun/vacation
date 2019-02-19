@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.AnswerMapper" >
+    <!-- 查询该问题对应的所有答案 -->
+    <select id="queryAnswer" parameterType="Integer" resultType="com.lyq.model.Answer">
+        select t.*,t.answer_content as answerContent,
+        t.answer_create_time as answerCreateTime,t.problem_id as problemId,
+        t.sites_id as sitesId from t_answer t where t.problem_id = #{id}
+    </select>
+    <!-- 新增答案 -->
+    <insert id="addAnswer" parameterType="com.lyq.model.Answer">
+        insert into t_answer
+        (id,answer_content,answer_create_time,problem_id,sites_id)
+        values
+        (#{id},#{answerContent},SYSDATE(),#{problemId},#{sitesId})
+    </insert>
+    <!-- 删除答案 -->
+    <delete id="deleteAnswer" parameterType="com.lyq.model.Answer">
+        delete from t_answer where id = #{id}
+    </delete>
+</mapper>

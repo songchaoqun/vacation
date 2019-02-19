@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.StaffMapper" >
+
+    <!-- 新增员工信息并返回主键Id -->
+    <insert id="addStaff" parameterType="com.lyq.model.Staff" useGeneratedKeys="true" keyProperty="id">
+        insert into t_staff
+        (id,password,staff_name)
+        values
+        (#{id},#{password},#{staffName})
+    </insert>
+    <!-- 新增中间关联表 -->
+    <insert id="addStaffRole">
+        insert into role_staff
+        (staffid,roleid)
+        values
+        <foreach collection="split" item="split" separator=",">
+            (#{id},#{split})
+        </foreach>
+    </insert>
+    <!-- 删除员工信息 -->
+    <delete id="deleteStaff" parameterType="Integer">
+        delete from t_staff where id = #{id}
+    </delete>
+    <!-- 查询员工信息 -->
+    <select id="queryStaffList" resultType="com.lyq.model.Staff">
+        select t.*,t.staff_name as staffName from t_staff t
+    </select>
+    <!-- 删除和这个id绑定的角色信息 -->
+    <delete id="deleteStaffRole" parameterType="Integer">
+        delete from role_staff where staffid = #{id}
+    </delete>
+    <!-- 查询该用户是否存在 -->
+    <select id="staffLogin" resultType="com.lyq.model.Staff" parameterType="com.lyq.model.Staff">
+        select t.*,t.staff_name as staffName from t_staff t where t.staff_name = #{staffName}
+    </select>
+</mapper>

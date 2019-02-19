@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.CourserMapper" >
+
+    <!-- 新增课程 -->
+    <insert id="addCourse" parameterType="com.lyq.model.Course">
+        insert into t_course
+        (id,browse,category,content,cover,mold)
+        values
+        (#{id},0,#{category},#{content},#{cover},#{mold})
+    </insert>
+    <!-- 删除课程 -->
+    <delete id="deleteCourse" parameterType="com.lyq.model.Course">
+        delete from t_course where id = #{id}
+    </delete>
+    <!-- 查询课程 -->
+    <select id="queryCourse" resultType="com.lyq.model.Course" parameterType="com.lyq.model.Course">
+        select t.*,m.name as moldName from t_course t,t_mold m where t.mold = m.id
+    </select>
+    <!-- 课程回显 -->
+    <select id="queryCourseById" resultType="com.lyq.model.Course" parameterType="com.lyq.model.Course">
+        select * from t_course t where t.id = #{id}
+    </select>
+    <!-- 修改课程 -->
+    <update id="updateCourse" parameterType="com.lyq.model.Course">
+        update t_course set category = #{category} , content = #{content} ,
+        cover = #{cover} , mold = #{mold} where id = #{id}
+    </update>
+    <!-- 查询所有课程 -->
+    <select id="queryCourseList" resultType="com.lyq.model.Course">
+        select * from t_course
+    </select>
+</mapper>
