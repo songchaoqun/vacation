@@ -22,4 +22,5 @@ public interface MoldService {
     Map<String, Object> reportsPillar();
     //饼 报表查询
     List<Map<String , Object>> reportsCake();
+
 }

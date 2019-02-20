@@ -36,9 +36,9 @@ public class StaffServiceImpl implements StaffService{
 
     //查询员工信息
     @Override
-    public Map<String, Object> queryStaffList(Integer page, Integer rows) {
+    public Map<String, Object> queryStaffList(Integer page, Integer rows,Staff staff) {
         Page<Staff> pageHelper = PageHelper.startPage(page, rows);
-        List<Staff> queryUserList = staffMapper.queryStaffList();
+        List<Staff> queryUserList = staffMapper.queryStaffList(staff);
         Map<String, Object> dataMap = new HashMap<String, Object>();
         dataMap.put("total", pageHelper.getTotal());
         dataMap.put("rows", queryUserList);

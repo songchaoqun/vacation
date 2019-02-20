@@ -17,6 +17,8 @@
             <tr>
                 <td>
                     <a href="javaScript:openDialogStaff('新增')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+                    用户名:<input class="easyui-textbox" id="staffName">
+                    <a href="javascript:searchUser()" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
                 </td>
             </tr>
         </table>
@@ -141,6 +143,16 @@
                 }
             });
         }
+
+        function  searchUser(){
+            $('#staffList').datagrid({
+                queryParams:{
+                    staffName:$("#staffName").textbox("getValue")
+                }
+            })
+        }
+
+
     </script>
 </body>
 </html>

@@ -47,16 +47,22 @@ public class MenuController {
     public String reportsPillar(){
         return "reports/reportsPillar";
     }
-    //跳转到报表 漏斗
-    @RequestMapping("funnel")
-    public String funnel(){
-        return "reports/lineChart";
+    //跳转到报表 环
+    @RequestMapping("circle")
+    public String circle(){
+        return "reports/circle";
     }
 
     //跳转到轮播图
     @RequestMapping("imgList")
     public String imgList(){
         return "img/imgList";
+    }
+
+    //跳转到报表 阴影
+    @RequestMapping("funnel")
+    public String lineChart(){
+        return "reports/lineChart";
     }
 
     //跳转到答案页面

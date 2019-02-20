@@ -35,8 +35,8 @@ public class StaffController {
     //查询员工信息
     @ResponseBody
     @RequestMapping("queryStaffList")
-    public Map<String ,Object> queryStaffList(Integer page, Integer rows){
-       return staffService.queryStaffList(page,rows);
+    public Map<String ,Object> queryStaffList(Integer page, Integer rows,Staff staff){
+       return staffService.queryStaffList(page,rows,staff);
     }
 
     //员工登录

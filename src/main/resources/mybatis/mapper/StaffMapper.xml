@@ -24,8 +24,12 @@
         delete from t_staff where id = #{id}
     </delete>
     <!-- 查询员工信息 -->
-    <select id="queryStaffList" resultType="com.lyq.model.Staff">
+    <select id="queryStaffList" resultType="com.lyq.model.Staff"  >
         select t.*,t.staff_name as staffName from t_staff t
+        WHERE 1=1
+        <if test="staff.staffName !=null and staff.staffName !='' ">
+         and   t.staff_Name like '%${staff.staffName}%'
+        </if>
     </select>
     <!-- 删除和这个id绑定的角色信息 -->
     <delete id="deleteStaffRole" parameterType="Integer">
