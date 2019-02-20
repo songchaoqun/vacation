@@ -93,6 +93,16 @@
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
         </dependency>
+        <!--aop依赖包-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!-- springboot mongodb依赖包-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
     </dependencies>
 
 

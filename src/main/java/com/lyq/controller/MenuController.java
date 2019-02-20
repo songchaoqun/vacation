@@ -18,6 +18,12 @@ public class MenuController {
     //验证码错误时显示
     private final static Logger LOGGER = LoggerFactory.getLogger(RandomValidateCodeUtil.class);
 
+    //跳转到报aop切面日志
+    @RequestMapping("logList")
+    public String logList(){
+        return "log/logList";
+    }
+
     //跳转到报表 柱
     @RequestMapping("pillar")
     public String pillar(){

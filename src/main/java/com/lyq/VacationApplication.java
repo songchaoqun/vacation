@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan({"com.lyq.mapper"})
+@MapperScan({"com.lyq.mapper","com.lyq.aspectj"})
 public class VacationApplication {
 
     public static void main(String[] args) {
