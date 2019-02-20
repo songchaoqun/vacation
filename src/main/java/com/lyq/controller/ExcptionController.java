@@ -1,7 +1,6 @@
 package com.lyq.controller;
 
 import com.lyq.model.ExcptionHandler;
-import com.lyq.model.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -31,7 +30,7 @@ public class ExcptionController {
         query.skip((page - 1) * rows);
         query.limit(rows);
         List<ExcptionHandler> find = mongoTemplate.find(query, ExcptionHandler.class);
-        long count = mongoTemplate.count(query, Log.class);
+        long count = mongoTemplate.count(query, ExcptionHandler.class);
         logMap.put("total", count);
         logMap.put("rows", find);
         return logMap;
