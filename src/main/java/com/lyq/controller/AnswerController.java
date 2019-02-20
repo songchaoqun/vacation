@@ -16,7 +16,7 @@ public class AnswerController {
 
     @Autowired
     private AnswerService answerService;
-
+     //哈哈
     //查询该问题对应的所有答案
     @ResponseBody
     @RequestMapping("queryAnswer")
