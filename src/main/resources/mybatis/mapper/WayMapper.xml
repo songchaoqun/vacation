@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.WayMapper" >
+    <!-- 新增权限路径 -->
+    <insert id="addWay" parameterType="com.lyq.model.Way">
+        insert into t_way
+        (id,name,url,tree_id)
+        values
+        (#{id},#{name},#{url},#{treeId})
+    </insert>
+    <!-- 删除权限路径 -->
+    <delete id="deleteWay" parameterType="com.lyq.model.Way">
+        delete from t_way where id = #{id}
+    </delete>
+    <!-- 查询权限路径 -->
+    <select id="queryWayList" parameterType="Integer" resultType="com.lyq.model.Way">
+        select * from t_way where tree_id = #{id}
+    </select>
+</mapper>

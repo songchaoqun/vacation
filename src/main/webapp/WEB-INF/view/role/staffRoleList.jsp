@@ -277,12 +277,115 @@
                             top: e.pageY
                         });
                     },
+                    onClick:function(node){
+                        selectWay(node.id);
+                        $("#treeId").val(node.id);
+                    },
                 })
             }
         </script>
-        <div data-options="region:'east',split:false,collapsible:false,title:'权限详细'" style="width:30%"></div>
-        <script></script>
+        <div data-options="region:'east',split:false,collapsible:false,title:'权限详细'" style="width:30%">
+            <div id="toolWay">
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="addOrUpdateWay('添加')">添加</a>
+            </div>
+            <table id="listWay"></table>
+            <div id="openWay" hidden="true">
+                <form id="formIdWay" method="post">
+                    <input type="hidden" name="treeId" id="treeId">
+                    <input type="hidden" name="id" id="ids">
+                    <table>
+                        <tr>
+                            <td>详情名称</td>
+                            <td>
+                                <input type="text" class="easyui-validatebox" name="name" data-options="required:true">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>详情地址</td>
+                            <td>
+                                <input type="text" class="easyui-validatebox" name="url" data-options="required:true">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <script>
+            //查询权限路径
+            function selectWay(val){
+                $("#listWay").datagrid({
+                    url: "${ctx}/way/queryWayList?id=" + val,
+                    fit: true,
+                    toolbar: "#toolWay",
+                    columns: [[
+                        {field:'id',title:'编号',checkbox:true},
+                        {field:'name',title:'权限详情名称'},
+                        {field:'url',title:'权限详情地址'},
+                        {field:'操作',title:'操作',
+                            formatter: function(value,row,index){
+                                var str = '<a href="javascript:removeWay('+row.id+')">删除</a>';
+                                return str;
+                            }
+                        }
+                    ]]
+                })
+            }
+            //新增权限路径
+            function addOrUpdateWay(text){
+                $("#openWay").dialog({
+                    title:text+'权限详情',
+                    width:300,
+                    height:200,
+                    modal: true,
+                    buttons:[{
+                        text:'保存',
+                        iconCls:'icon-save',
+                        handler:function(){
+                            $("#formIdWay").form('submit',{
+                                url:"${ctx}/way/addWay",
+                                success:function(pm){
+                                    $.messager.alert("提示","新增成功");
+                                    $("#formIdWay").form("reset");
+                                    $("#openWay").dialog("close");
+                                    selectWay($("#treeId").val());
+                                }
+                            })
+                        }
+                    },{
+                        text:'取消',
+                        iconCls:'icon-cancel',
+                        handler:function(){
+                            $("#ids").val("");
+                            $("#formIdWay").form('reset');
+                            $("#openWay").dialog("close");
+                        }
+                    }],
+                    onClose:function(){
+                        $("#ids").val("");
+                        $("#formIdWay").form('reset');
+                    }
+                })
+            }
+            //删除权限路径
+            function removeWay(val){
+                $.messager.confirm('提示','你确定删除这条记录吗?',function(r){
+                    if(r){
+                        $.ajax({
+                            url: '<%=path%>/way/deleteWay',
+                            type: 'post',
+                            data: {id:val},
+                            success: function(pm){
+                                $.messager.alert('提示','删除成功');
+                                return selectWay($("#treeId").val());
+                            },
+                            error:function(){
+                                $.messager.alert("提示","后台出错,请联系后台管理人员");
+                            }
+                        })
+                    }
+                });
+            }
+        </script>
     </div>
-
 </body>
 </html>
