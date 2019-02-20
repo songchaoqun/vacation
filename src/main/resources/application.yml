@@ -39,6 +39,9 @@ pagehelper:
   params: count=countSql
 logging:
   config: classpath:conf/log4j2.xml
+err:
+  logging:
+    file: err.log
 # LOG4J配置
 #  log4j.rootLogger=INFO,stdout,file
 #  # 日志输出到文件
