@@ -13,20 +13,18 @@
 </head>
 <style type="text/css">
     body{
-        font-size:12px;
-        background-image: url(<%=request.getContextPath()%>/image/bg.gif);
-        background-repeat: repeat;
-    }
+           font-size:12px;
+           background-image: url(<%=request.getContextPath()%>/image/bg.gif);
+           background-repeat: repeat;
+       }
     ul,li,h2{margin:0;padding:0;}
     ul{list-style:none;}
     #top{
-        width:909px;
+        width:1220px;
         height:26px;
         background-image: url(<%=request.getContextPath()%>/image/h2bg.gif);
         margin-top: 0;
-        margin-right: auto;
         margin-bottom: 0;
-        margin-left: auto;
         background-repeat: repeat-x;
     }
     #top h2{
@@ -82,13 +80,12 @@
         font-size: 12px;
     }
     #main{
-        width:909px;
-        height:501px;
+        width:1159px;
+        height:601px;
         background-color:#F5F7E6;
         margin-top: 0;
-        margin-right: auto;
         margin-bottom: 0;
-        margin-left: auto;
+
     }
     #main .jg {
         width: 5px;
@@ -98,7 +95,7 @@
     }
     #leftMenu{
         width:150px;
-        height:500px;
+        height:600px;
         background-color:#DAE7F6;
         float:left;
         border-right-width: 1px;
@@ -130,8 +127,8 @@
         background-repeat: repeat-x;
     }
     #content{
-        width:750px;
-        height:500px;
+        width:1000px;
+        height:600px;
         float:left;
         border-right-width: 1px;
         border-left-width: 1px;
@@ -142,8 +139,8 @@
         background-color: #DAE7F6;
     }
     .content{
-        width:740px;
-        height:490px;
+        width:1040px;
+        height:590px;
         display:none;
         padding:5px;
         overflow-y:auto;
@@ -151,7 +148,7 @@
         background-color: #FFFFFF;
     }
     #footer{
-        width:907px;
+        width:1210px;
         height:26px;
         background-color:#FFFFFF;
         line-height:20px;
@@ -159,7 +156,6 @@
         margin-top: 0;
         margin-right: auto;
         margin-bottom: 0;
-        margin-left: auto;
         border-right-width: 1px;
         border-left-width: 1px;
         border-right-style: solid;
@@ -281,7 +277,7 @@
                 <div id="tabs" class="easyui-tabs" data-options="fit:true"></div>
     </div>
 </div>
-<div id="footer"><marquee>课堂管理系统~~ 欢迎您光临</marquee></div>
+<div id="footer"><marquee><b>课堂管理系统~~ 欢迎您光临</b></marquee></div>
 </body>
 <script type="text/javascript">
     $(function(){
