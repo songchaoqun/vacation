@@ -35,6 +35,11 @@ public class MenuController {
     public String reportsPillar(){
         return "reports/reportsPillar";
     }
+    //跳转到报表 漏斗
+    @RequestMapping("funnel")
+    public String funnel(){
+        return "reports/lineChart";
+    }
 
     //跳转到轮播图
     @RequestMapping("imgList")
