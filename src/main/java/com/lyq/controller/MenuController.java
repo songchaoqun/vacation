@@ -35,6 +35,11 @@ public class MenuController {
     public String reportsPillar(){
         return "reports/reportsPillar";
     }
+    //跳转到报表 环
+    @RequestMapping("circle")
+    public String circle(){
+        return "reports/circle";
+    }
 
     //跳转到轮播图
     @RequestMapping("imgList")

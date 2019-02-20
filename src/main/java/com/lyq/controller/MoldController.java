@@ -4,6 +4,7 @@ import com.lyq.model.Mold;
 import com.lyq.service.MoldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -75,4 +76,6 @@ public class MoldController {
     public List<Map<String , Object>> reportsCake(){
         return moldService.reportsCake();
     }
+
+
 }
