@@ -47,6 +47,12 @@ public class MenuController {
         return "img/imgList";
     }
 
+    //跳转到报表 阴影
+    @RequestMapping("funnel")
+    public String lineChart(){
+        return "reports/lineChart";
+    }
+
     //跳转到答案页面
     @RequestMapping("answerList")
     public String answerList(Integer id, Model model){
