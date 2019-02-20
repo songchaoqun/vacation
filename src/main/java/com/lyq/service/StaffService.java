@@ -11,7 +11,7 @@ public interface StaffService {
     //删除员工信息
     void deleteStaff(Staff staff);
     //查询员工信息
-    Map<String, Object> queryStaffList(Integer page, Integer rows);
+    Map<String, Object> queryStaffList(Integer page, Integer rows,Staff staff);
     //员工登录
     String staffLogin(Staff staff, HttpSession session);
 }
