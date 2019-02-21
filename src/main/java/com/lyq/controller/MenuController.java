@@ -132,6 +132,17 @@ public class MenuController {
         return "role/staffRoleList";
     }
 
+    //跳转到会员管理页面
+    @RequestMapping("toMemList")
+    public String toMemList(){
+        return "mem/membersList";
+    }
+    //跳转到套餐详细查看页面
+    @RequestMapping("toPaList")
+    public String toPaList(){
+        return "pack/packagesList";
+    }
+
     /**
      * 前台获取验证码
      * 生成验证码

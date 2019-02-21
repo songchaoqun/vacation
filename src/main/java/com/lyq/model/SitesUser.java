@@ -19,6 +19,8 @@ public class SitesUser {
 
     private String sitesPhone; //手机号
 
+    private Integer  membersId;//会员Id
+
     @Transient
     private String verification;//验证码
 
@@ -78,5 +80,12 @@ public class SitesUser {
 
     public void setSitesUserName(String sitesUserName) {
         this.sitesUserName = sitesUserName;
+    }
+
+    public Integer getMembersId() {
+        return membersId;
+    }
+    public void setMembersId(Integer membersId) {
+        this.membersId = membersId;
     }
 }
