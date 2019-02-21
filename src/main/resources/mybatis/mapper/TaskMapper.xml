@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lyq.mapper.TaskMapper">
+
+
+	<select id="queryTask" parameterType="Integer" resultType="com.lyq.model.Task">
+       SELECT a.*,b.staff_name cre_name,c.staff_name fin_name from t_task a LEFT JOIN t_staff b on a.cre_id=b.id LEFT JOIN t_staff c on a.fin_id=c.id  where  a.fin_id=#{id} and a.status=0
+    </select>
+
+    	<!--&lt;!&ndash;&lt;!&ndash; 查询总&ndash;&gt;&ndash;&gt;-->
+	<!--&lt;!&ndash;&ndash;&gt;-->
+    <select id="queryTaff"  resultType="com.lyq.model.Staff">
+       select t.*,t.staff_name as staffName from t_staff t where t.id not in(#{id})
+    </select>
+	<update id="updateStatus"  parameterType="Integer">
+		update t_task set status=1 where id=#{id}
+
+	</update>
+	<!--&lt;!&ndash; 新增任务&ndash;&gt;-->
+	<insert id="addTask" >
+	insert into t_task (cre_id,fin_id,task_name,status,cre_time) values (#{cid},#{t.fin_id},#{t.task_name},0,SYSDATE())
+	</insert>
+	<!--&lt;!&ndash; 删除任务&ndash;&gt;-->
+	<delete id="delTask">
+
+		delete from t_task where id=#{ids}
+	</delete>
+
+
+	<!--&lt;!&ndash; 新增流程单 &ndash;&gt;-->
+	<!--<insert id="savePro" parameterType="com.jk.model.Process">-->
+		<!--insert into t_pro (name) values (#{name})-->
+	<!--</insert>-->
+	<!--&lt;!&ndash; 删除流程单 &ndash;&gt;-->
+	<!--<delete id="delPro" parameterType="string">-->
+		<!--delete from t_pro where pid in-->
+		<!--<foreach collection="array" open="(" close=")" separator="," item="id">-->
+			<!--#{id}-->
+		<!--</foreach>-->
+	<!--</delete>-->
+	<!--&lt;!&ndash; 新增角色流程 &ndash;&gt;-->
+	<!--<insert id="saveRolePro" parameterType="com.jk.model.RolePro">-->
+		<!--insert into t_role_pro (pid,sid) values (#{pid},#{sid})-->
+	<!--</insert>-->
+	<!--&lt;!&ndash; 登录 &ndash;&gt;-->
+	<!--<select id="login"  resultType="com.jk.model.User">-->
+		<!--select u.id id, u.username userName,u.password UserPwd,u.roleId roleId-->
+		<!--from t_user u-->
+		<!--where u.username = #{userName}-->
+	<!--</select>-->
+
+
+	<!--&lt;!&ndash;根据pid查询sid&ndash;&gt;-->
+	<!--<select id="querySidByPid"  resultType="String">-->
+		<!--select sid-->
+		<!--from t_role_pro-->
+		<!--where pid = #{lid}-->
+	<!--</select>-->
+	<!--&lt;!&ndash; 新增Work &ndash;&gt;-->
+	<!--<insert id="addWork" parameterType="com.jk.model.Work">-->
+		<!--insert into t_work (lid,uid,rid,status,info)values (#{lid},#{uid},#{rid},0,#{info})-->
+	<!--</insert>-->
+	<!--&lt;!&ndash; 查询待审核单 &ndash;&gt;-->
+
+	<!--<select id="queryAudit"  resultType="com.jk.model.Work">-->
+		<!--select *-->
+		<!--from t_work-->
+		<!--where rid= #{uid}-->
+	<!--</select>-->
+	<!--&lt;!&ndash; 单条查询Work &ndash;&gt;-->
+	<!--<select id="queryWorkById"  resultType="com.jk.model.Work">-->
+		<!--select *-->
+		<!--from t_work-->
+		<!--where id= #{id}-->
+	<!--</select>-->
+	<!--&lt;!&ndash; 处理Work &ndash;&gt;-->
+	<!--<update id="dealWork" >-->
+		<!--update t_work  set rid=#{sid} where id=#{id}-->
+
+	<!--</update>-->
+	<!--&lt;!&ndash; 新增属性 &ndash;&gt;-->
+	<!--<insert id="addProperty" parameterType="com.jk.model.Property">-->
+		<!--insert into t_property (lid,pname,ptype)values (#{lid},#{s},#{s1})-->
+	<!--</insert>-->
+	<!--&lt;!&ndash; 根据lid查询属性表&ndash;&gt;-->
+	<!--<select id="queryPropertyByLid"  resultType="com.jk.model.Property">-->
+		<!--select *-->
+		<!--from t_property-->
+		<!--where lid= #{lid}-->
+	<!--</select>-->
+	<!--&lt;!&ndash; 新增属性值表&ndash;&gt;-->
+	<!--<insert id="addProValue" parameterType="com.jk.model.ProValue">-->
+		<!--insert into t_property_value (lid,uid,pvalue,perid)values (#{lid},#{uid},#{pvalue},#{perid})-->
+	<!--</insert>-->
+
+
+    <!--&lt;!&ndash;修改余额  &ndash;&gt;-->
+    <!--<update id="updateUser">-->
+    <!---->
+    <!--update t_user set  userMoney = userMoney-#{sum}-->
+    <!---->
+    <!---->
+    <!--</update>-->
+
+    <!--<select id="queryTree" resultType="com.jk.model.Tree">-->
+		<!--select * from t_tree-->
+	<!--</select>-->
+    <!---->
+    	<!--公共Sql
+		    <sql id="querySql">
+		where 1=1
+		<if test="o.employee_name!=null and o.employee_name!=''">
+		 and e.employee_name like '%${o.employee_name}%' 
+		</if>
+		
+		<if test="o.sex!=null and o.sex!=0">
+		 and e.sex =  #{o.sex}
+		</if>
+		
+		<if test="o.sdate!=null and o.sdate!=''">
+		 and e.birthday &gt;= to_date(#{o.sdate},'yyyy-mm-dd')
+		</if>
+		
+		<if test="o.edate!=null and o.edate!=''">
+		 and e.birthday &lt;= to_date(#{o.edate},'yyyy-mm-dd')
+		</if>
+		
+		<if test="o.id!=null and o.id!=''">
+		 and o.id =#{o.id}
+		</if>
+		
+		   </sql> -->
+
+
+	
+</mapper>

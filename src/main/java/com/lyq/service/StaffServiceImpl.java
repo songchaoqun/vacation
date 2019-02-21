@@ -55,7 +55,7 @@ public class StaffServiceImpl implements StaffService{
             if(s != null){
                 if(s.getStaffName().equals(staff.getStaffName())){
                     if(s.getPassword().equals(staff.getPassword())){
-                        session.setAttribute("staff",staff);
+                        session.setAttribute("staff",s);
                         return "1";
                     }
                     return "2";

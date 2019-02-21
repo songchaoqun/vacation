@@ -72,6 +72,7 @@ public class MenuController {
         return "answer/answerList";
     }
 
+
     //跳转到问题页面
     @RequestMapping("problemList")
     public String problemList(){
@@ -82,6 +83,11 @@ public class MenuController {
     @RequestMapping("commentList")
     public String commentList(){
         return "comment/commentList";
+    }
+    //跳转到任务页面
+    @RequestMapping("toTask")
+    public String toTask(){
+        return "task/task";
     }
 
     //跳转到用户回收站
