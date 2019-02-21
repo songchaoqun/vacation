@@ -7,7 +7,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.150:3306/vacation?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/vacation?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: lyq
     password: 123
   #  配置jpa自动生成表
@@ -24,7 +24,7 @@ spring:
 #  mongodb 配置
   data:
     mongodb:
-      uri: mongodb://192.168.43.139:27017/hell
+      uri: mongodb://127.0.0.1:27017/hell
 # 时间格式
 jackson:
   date-format: java.text.SimpleDateFormat    #或正则yyyy-MM-dd HH:mm:ss
