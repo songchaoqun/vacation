@@ -17,6 +17,8 @@
             <tr>
                 <td>
                     <a href="javaScript:openDialogMold('新增')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+                    类型名称:<input class="easyui-textbox" id="name">
+                    <a href="javascript:searchMold()" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
                 </td>
             </tr>
         </table>
@@ -126,6 +128,13 @@
                     })
                 }
             });
+        }
+        function  searchMold(){
+            $('#moldList').datagrid({
+                queryParams:{
+                    name:$("#name").textbox("getValue")
+                }
+            })
         }
     </script>
 </body>

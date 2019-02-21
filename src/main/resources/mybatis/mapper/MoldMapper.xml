@@ -31,4 +31,12 @@
         select t.`name` as name,count(t.`name`) as reports from t_mold t,t_course c
         where t.id = c.mold GROUP BY t.`name`
     </select>
+    <!-- 查询所有类型加分页 -->
+    <select id="queryMoldList" resultType="com.lyq.model.Mold">
+        select *  from t_mold
+        WHERE 1=1
+        <if test="mold.name !=null and mold.name !='' ">
+            and  name like '%${mold.name}%'
+        </if>
+    </select>
 </mapper>

@@ -19,9 +19,9 @@ public class MoldServiceImpl implements MoldService{
     private MoldMapper moldMapper;
 
     //查询所有类型加分页
-    public Map<String, Object> queryMold(Integer page, Integer rows) {
+    public Map<String, Object> queryMold(Integer page, Integer rows,Mold mold) {
         Page<Mold> pageHelper = PageHelper.startPage(page, rows);
-        List<Mold> queryMoleList = moldMapper.queryMold();
+        List<Mold> queryMoleList = moldMapper.queryMoldList(mold);
         Map<String, Object> dataMap = new HashMap<String, Object>();
         dataMap.put("total", pageHelper.getTotal());
         dataMap.put("rows", queryMoleList);
