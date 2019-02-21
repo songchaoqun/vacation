@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface MoldService {
     //查询所有类型加分页
-    Map<String, Object> queryMold(Integer page, Integer rows);
+    Map<String, Object> queryMold(Integer page, Integer rows,Mold mold);
     //删除类型
     void deleteMold(Mold mold);
     //新增类型

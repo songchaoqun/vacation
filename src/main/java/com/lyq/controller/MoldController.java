@@ -31,8 +31,8 @@ public class MoldController {
     //查询所有类型加分页
     @ResponseBody
     @RequestMapping("queryMold")
-    public Map<String , Object> queryMold(Integer page, Integer rows){
-        return moldService.queryMold(page,rows);
+    public Map<String , Object> queryMold(Integer page, Integer rows,Mold mold){
+        return moldService.queryMold(page,rows,mold);
     }
 
     //删除类型
