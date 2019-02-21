@@ -24,7 +24,7 @@ spring:
 #  mongodb 配置
   data:
     mongodb:
-      uri: mongodb://localhost:27017/hell
+      uri: mongodb://192.168.43.139:27017/hell
 # 时间格式
 jackson:
   date-format: java.text.SimpleDateFormat    #或正则yyyy-MM-dd HH:mm:ss
