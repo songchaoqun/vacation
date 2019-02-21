@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface TaskMapper {
-    //查询
+    //查询任务
     List<Task> queryTask(Integer id);
 
     List<Staff> queryTaff(Integer id);
