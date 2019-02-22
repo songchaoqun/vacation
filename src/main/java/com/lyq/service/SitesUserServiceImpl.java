@@ -5,9 +5,14 @@ import com.github.pagehelper.PageHelper;
 import com.lyq.mapper.SitesUserMapper;
 import com.lyq.model.Mold;
 import com.lyq.model.SitesUser;
+import com.lyq.utils.CommonCanstant;
+import com.lyq.utils.HttpClientUtil;
+import com.lyq.utils.MD5Util;
+import com.lyq.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,4 +67,38 @@ public class SitesUserServiceImpl implements SitesUserService{
     public List<SitesUser> queryCommentSitesUser() {
         return sitesUserMapper.querySitesUser();
     }
+
+    @Override
+    public List<SitesUser> queryCheckUser() {
+        return sitesUserMapper.queryCheckUser();
+    }
+
+    @Override
+    public void checkUser(Integer id) {
+        sitesUserMapper.checkUser(id);
+        //手机号查询
+        SitesUser s=sitesUserMapper.queryCheckUserById(id);
+        String phone=s.getSitesPhone();
+        if(s.getStatus()==1){
+            String url = CommonCanstant.SEND_MSG_URL;
+            HashMap<String, Object> params = new HashMap<>();
+            params.put("accountSid", CommonCanstant.SEND_MSG_ACCOUNT_ID);//开发者主账号ID
+            params.put("to",phone);//短信接收端手机号码集合
+            String time = TimeUtil.format(new Date());
+            params.put("timestamp",time);//时间戳
+            String sigStr = CommonCanstant.SEND_MSG_ACCOUNT_ID+CommonCanstant.SEND_MSG_TOKEN+time;
+            params.put("sig", MD5Util.getMd532(sigStr));//签名。MD5(ACCOUNT SID + AUTH TOKEN + timestamp)。共32位（小写）
+            params.put("templateid", "1120139740");//短信模板ID
+            String seCode= "恭喜审核通过，欢迎成为本站用户哦！";
+            params.put("param", seCode+",3");//短信变量
+            String post = HttpClientUtil.post(url, params);
+
+        }
+
+
+
+
+    }
+
+
 }
