@@ -108,6 +108,12 @@ public class MenuController {
         return "catalog/catalogList";
     }
 
+    //跳转到用户审核页面
+    @RequestMapping("toCheck")
+    public String toCheck(){
+        return "sitesUser/checkUser";
+    }
+
     //跳转到课程管理页面
     @RequestMapping("courseList")
     public String courseList(){

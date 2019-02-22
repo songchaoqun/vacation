@@ -6,12 +6,17 @@
     <select id="querySitesUser" resultType="com.lyq.model.SitesUser">
         select t.*,t.sites_name as sitesName,t.sites_phone as sitesPhone,t.sites_user_name as sitesUserName from t_sites_user t where t.state = 1
     </select>
+    <!-- 查询待审核网站用户 -->
+    <select id="queryCheckUser" resultType="com.lyq.model.SitesUser">
+        select t.*,t.sites_name as sitesName,t.sites_phone as sitesPhone,t.sites_user_name as sitesUserName from t_sites_user t where t.state = 1 and t.status=0
+    </select>
+
     <!-- 新增网站用户 -->
     <insert id="addSitesUser" parameterType="com.lyq.model.SitesUser">
         insert into t_sites_user
-        (id,password,sites_name,sites_phone,state,sites_user_name)
+        (id,password,sites_name,sites_phone,state,sites_user_name,status)
         values
-        (#{id},#{password},#{sitesName},#{sitesPhone},1,#{sitesUserName})
+        (#{id},#{password},#{sitesName},#{sitesPhone},1,#{sitesUserName},0)
     </insert>
     <!-- 删除网站用户 逻辑删 -->
     <update id="deleteSitesUser" parameterType="com.lyq.model.SitesUser">
@@ -21,6 +26,15 @@
     <select id="querySitesUserList" resultType="com.lyq.model.SitesUser" parameterType="com.lyq.model.SitesUser">
         select t.*,t.sites_name as sitesName,t.sites_phone as sitesPhone,t.sites_user_name as sitesUserName from t_sites_user t where t.id = #{id}
     </select>
+    <!-- 查询一个待审核人员信息 -->
+    <select id="queryCheckUserById" resultType="com.lyq.model.SitesUser" >
+        select t.*,t.sites_name as sitesName,t.sites_phone as sitesPhone,t.sites_user_name as sitesUserName from t_sites_user t where t.id = #{id}
+    </select>
+    <!-- 更改审核状态 -->
+    <update id="checkUser" >
+        update t_sites_user set status = 1 where id = #{id}
+    </update>
+
     <!-- 修改网站用户 -->
     <update id="updateSitesUser" parameterType="com.lyq.model.SitesUser">
         update t_sites_user set sites_name = #{sitesName},sites_phone = #{sitesPhone},password=#{password},sites_user_name=#{sitesUserName}

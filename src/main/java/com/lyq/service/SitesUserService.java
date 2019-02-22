@@ -20,4 +20,8 @@ public interface SitesUserService {
     Map<String, Object> queryRecycleSitesUser(Integer page, Integer rows);
     //查询所有正常用户
     List<SitesUser> queryCommentSitesUser();
+    //查询待审核用户
+    List<SitesUser> queryCheckUser();
+    //审核通过
+    void checkUser(Integer id);
 }

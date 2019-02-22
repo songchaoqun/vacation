@@ -22,9 +22,9 @@ public class Task {
     @Transient
     private  String edate;
     @Transient
-    private  String	 cre_name;
+    private  String	 cre_name;//创建人姓名
     @Transient
-    private  String fin_name;
+    private  String fin_name;//执行人人姓名
 
     public String getSdate() {
         return sdate;

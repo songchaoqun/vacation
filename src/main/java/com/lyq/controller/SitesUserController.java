@@ -24,6 +24,18 @@ public class SitesUserController {
     public Map<String , Object> querySitesUser(Integer page, Integer rows){
         return sitesUserService.querySitesUser(page,rows);
     }
+    //查询未审核网站用户
+    @ResponseBody
+    @RequestMapping("queryCheckUser")
+    public List<SitesUser> queryCheckUser(){
+        return sitesUserService.queryCheckUser();
+    }
+    //用户审核通过更改状态
+    @ResponseBody
+    @RequestMapping("checkUser")
+    public void checkUser(Integer id){
+        sitesUserService.checkUser(id);
+    }
 
     //新增网站用户
     @ResponseBody
