@@ -2,6 +2,7 @@ package com.lyq.service;
 
 import com.lyq.model.SitesUser;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -20,4 +21,6 @@ public interface SitesUserService {
     Map<String, Object> queryRecycleSitesUser(Integer page, Integer rows);
     //查询所有正常用户
     List<SitesUser> queryCommentSitesUser();
+
+    String sitesUserLogin(SitesUser user, HttpSession session);
 }

@@ -35,10 +35,23 @@ public class MembersController {
      return   membersService.queryMem();
     }
 
+    @RequestMapping("queryBymId")
+    @ResponseBody
+    public Members queryBymId(Integer membersId){
+     System.out.println(membersId);
+     return   membersService.queryBymId(membersId);
+    }
+
     @RequestMapping("saveMem")
     @ResponseBody
     public String saveMem(HttpSession session, MemPacka me){
      return membersService.saveMem(me,session);
+    }
+
+    @RequestMapping("upMem")
+    @ResponseBody
+    public void upMem(HttpSession session, MemPacka me){
+      membersService.upMem(me,session);
     }
 
 }

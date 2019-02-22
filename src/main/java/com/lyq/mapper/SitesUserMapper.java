@@ -1,6 +1,7 @@
 package com.lyq.mapper;
 
 import com.lyq.model.SitesUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface SitesUserMapper {
     void updateSitesUser(SitesUser sitesUser);
     //回收站 查询被删除的网站用户
     List<SitesUser> queryRecycleSitesUser();
-}
+    SitesUser     sitesUserLogin(@Param("user") SitesUser  user);
+
+    }

@@ -5,9 +5,11 @@ import com.github.pagehelper.PageHelper;
 import com.lyq.mapper.SitesUserMapper;
 import com.lyq.model.Mold;
 import com.lyq.model.SitesUser;
+import com.lyq.model.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,4 +64,29 @@ public class SitesUserServiceImpl implements SitesUserService{
     public List<SitesUser> queryCommentSitesUser() {
         return sitesUserMapper.querySitesUser();
     }
+
+
+
+    public static final String RANDOMCODEKEY = "RANDOMVALIDATECODEKEY";//放到session中的key
+
+    //员工登录
+    public String sitesUserLogin(SitesUser user, HttpSession session) {
+        String randomcodekey = (String) session.getAttribute(RANDOMCODEKEY);
+        if(user.getVerification().equals(randomcodekey)){
+            SitesUser s = sitesUserMapper.sitesUserLogin(user);
+            if(s != null){
+                if(s.getSitesName().equals(user.getSitesName())){
+                    if(s.getPassword().equals(user.getPassword())){
+                        session.setAttribute("user",s);
+                        return "1";
+                    }
+                    return "2";
+                }
+                return "2";
+            }
+            return "2";
+        }
+        return "3";
+    }
+
 }

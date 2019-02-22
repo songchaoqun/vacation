@@ -41,6 +41,15 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>1.3.2</version>
         </dependency>
+
+
+        <!--springBoot工程实现热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- springboot整合jpa反向生成表 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -154,6 +163,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork><!--注意要修改这里-->
+                </configuration>
             </plugin>
         </plugins>
     </build>

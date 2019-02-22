@@ -11,7 +11,7 @@ public class MemPacka {
     //会员用户关系表
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;   //中间表Id
+    private Integer ids;   //中间表Id
 
     private Integer uid; //用户Id
 
@@ -23,12 +23,12 @@ public class MemPacka {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date duetoDate; // 到期时间
 
-    public Integer getId() {
-        return id;
+    public Integer getIds() {
+        return ids;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIds(Integer ids) {
+        this.ids = ids;
     }
 
     public Integer getUid() {

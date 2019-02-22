@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+
     <%@ include file="/WEB-INF/view/common/base.jsp" %>
 </head>
 <body>
@@ -16,7 +17,7 @@
         <table>
             <tr>
                 <td>
-                    <a href="javaScript:openDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">成为会员</a>
+                    <a href="javaScript:openDialog('新增')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">成为会员</a>
                 </td>
             </tr>
         </table>
@@ -24,7 +25,7 @@
     <table id="membersTable"></table>
     <div id="openStaff">
         <form id="formId" method="post">
-            <input style="display:none" name="id">
+            <input  style="display:none"  name="ids" id="ids">
             <input type="hidden" class="easyui-validatebox" name="uid" >
             <table>
                 <tr>
@@ -36,6 +37,7 @@
                 <tr>
                     <td>结束时间</td>
                     <td>
+                    <%--    <input  style="display:none"  class="easyui-datebox" name="createDate">--%>
                         <input class="easyui-datebox" name="duetoDate">
                     </td>
                 </tr>
@@ -50,10 +52,9 @@
 
 
         //新增员工
-        function openDialog(){
-
+        function openDialog(text){
             $("#openStaff").dialog({
-                title:'成为会员',
+                title:text+'会员',
                 width:600,
                 height:540,
                 closed:false,
@@ -66,7 +67,16 @@
                     text:'确定',
                     iconCls:'icon-save',
                     handler:function(){
-                      memAdd();
+
+                        // 通过id来控制，执行新增还是修改的函数
+                        if($("#ids").val() != null && $("#ids").val() != ''){
+                            // 有id 走修改
+                            upMem();
+                        } else {
+                            // 没有id 走新增
+                            memAdd();
+                        }
+
                     }
                 },{
                     text:'取消',
@@ -90,8 +100,8 @@
                 pagination:true,
                 pagePosition:'bottom',
                 pageNumber:1,
-                pageSize:2,
-                pageList:[2,6,15,21,42],
+                pageSize:3,
+                pageList:[3,6,15,21,42],
                 toolbar:"#searchStaff",
                 columns:[[
                     {field:'membersId',title:'会员编号',align:'center',checkbox:true},
@@ -99,10 +109,10 @@
                     {field:'createDate',title:'创建时间',align:'center'},
                     {field:'pName',title:'套餐名称',align:'center'},
                     {field:'duetoDate',title:'到期时间',align:'center'},
-                    {field:'staffName',title:'用户名',align:'center'},
+                    {field:'sitesUserName',title:'用户名',align:'center'},
                     {field:'tool',title:'操作',align:'center',
                         formatter: function(value,row,index){
-                            var str = '<a href="javascript:removeStaff('+row.membersId+')">删除</a>';
+                            var str = '<a href="javascript:queryMembersId('+row.membersId+')">修改</a>';
                             return str;
                         }
                     },
@@ -143,7 +153,34 @@
 
         }
 
-        //查询
+        //修改回显
+         function queryMembersId(membersId){
+             $.ajax({
+                 url:"<%=request.getContextPath()%>/members/queryBymId",
+                 data:{membersId:membersId},
+                 type: 'post',
+                 success:function(data){
+                     openDialog('修改');
+                     $("#formId").form('load',data);
+                 },error:function(){
+                     $.messager.alert("提示","错误","info");
+                 }
+
+             })
+         }
+
+         function  upMem(){
+             $("#formId").form("submit",{
+                 url:"<%=request.getContextPath() %>/members/upMem",
+                 success:function(){
+                     $.messager.alert("提示","修改成功","info");
+                         $("#membersTable").datagrid("load");
+                         $("#openStaff").dialog("close");
+                     }
+             })
+
+         }
+
 
     </script>
 </body>
