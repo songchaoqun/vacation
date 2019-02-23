@@ -3,6 +3,7 @@ package com.lyq.service;
 import com.lyq.mapper.MembersMapper;
 import com.lyq.model.MemPacka;
 import com.lyq.model.Members;
+import com.lyq.model.SitesUser;
 import com.lyq.model.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,15 +38,31 @@ public class MembersServiceImpl implements  MembersService{
 
     @Override
     public String saveMem(MemPacka me,HttpSession session) {
-        Staff staff= (Staff) session.getAttribute("staff");
-        System.out.println(staff.getId());
-        me.setUid(staff.getId());
+        SitesUser user= (SitesUser) session.getAttribute("user");
+        System.out.println(user.getId());
+        me.setUid(user.getId());
         MemPacka memp=membersMapper.queryMemPackByuid(me.getUid());
             if(memp !=null){
               return  "您已是尊贵的会员无需购买";
             }
                membersMapper.saveMem(me);
             return  "购买成功";
+    }
+
+    @Override
+    public Members queryBymId(Integer membersId) {
+        return membersMapper.queryBymId(membersId);
+    }
+
+    @Override
+    public void upMem(MemPacka me, HttpSession session) {
+   /*     SitesUser user= (SitesUser) session.getAttribute("user");
+        System.out.println(user.getId());
+        me.setUid(user.getId());*/
+/*        //获取登录人的Id去查询看他是否是管理员
+        SitesUser   dbUser=membersMapper.queryRoleId(user.getId());*/
+
+         membersMapper.upMem(me);
     }
 
 }

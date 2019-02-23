@@ -2,6 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--指定mapper位置-->
 <mapper namespace="com.lyq.mapper.SitesUserMapper" >
+
+    <!-- 查询该用户是否存在 -->
+    <select id="sitesUserLogin" resultType="com.lyq.model.SitesUser" parameterType="com.lyq.model.SitesUser">
+          select
+            u.id as id,
+            u.password as password,
+            u.sites_name as sitesName,
+            u.sites_phone as sitesPhone,
+            u.sites_user_name as sitesUserName,
+            u.state as state
+
+           from t_sites_user u
+            where 1=1
+            and  u.sites_name =#{user.sitesName}
+            and  u.password=#{user.password}
+    </select>
+
     <!-- 查询网站用户列表 并分页 -->
     <select id="querySitesUser" resultType="com.lyq.model.SitesUser">
         select t.*,t.sites_name as sitesName,t.sites_phone as sitesPhone,t.sites_user_name as sitesUserName from t_sites_user t where t.state = 1

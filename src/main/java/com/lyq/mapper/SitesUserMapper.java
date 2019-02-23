@@ -1,6 +1,7 @@
 package com.lyq.mapper;
 
 import com.lyq.model.SitesUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public interface SitesUserMapper {
     void updateSitesUser(SitesUser sitesUser);
     //回收站 查询被删除的网站用户
     List<SitesUser> queryRecycleSitesUser();
+<<<<<<< HEAD
     //查询待审核所有用户
     List<SitesUser> queryCheckUser();
    //查询一个待审核用户信息
@@ -24,3 +26,8 @@ public interface SitesUserMapper {
   //更改审核状态
     void checkUser(Integer id);
 }
+=======
+    SitesUser     sitesUserLogin(@Param("user") SitesUser  user);
+
+    }
+>>>>>>> origin/master

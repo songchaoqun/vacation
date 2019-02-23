@@ -16,7 +16,15 @@ public class Members {
       private String  membersName;  //会员名称
 
       @Transient
+      private String    sitesUserName;
+      @Transient
       private String    staffName;
+      @Transient
+      private Integer    mid;
+      @Transient
+      private Integer    ids;
+      @Transient
+      private Integer    uid;
       @Transient
       private String    createDate;
       @Transient
@@ -24,50 +32,83 @@ public class Members {
       @Transient
       private String    pName;
 
-      public String getStaffName() {
-            return staffName;
-      }
+ public Integer getMembersId() {
+  return membersId;
+ }
 
-      public void setStaffName(String staffName) {
-            this.staffName = staffName;
-      }
+ public void setMembersId(Integer membersId) {
+  this.membersId = membersId;
+ }
 
-      public String getCreateDate() {
-            return createDate;
-      }
+ public String getMembersName() {
+  return membersName;
+ }
 
-      public void setCreateDate(String createDate) {
-            this.createDate = createDate;
-      }
+ public void setMembersName(String membersName) {
+  this.membersName = membersName;
+ }
 
-      public String getDuetoDate() {
-            return duetoDate;
-      }
+ public String getSitesUserName() {
+  return sitesUserName;
+ }
 
-      public void setDuetoDate(String duetoDate) {
-            this.duetoDate = duetoDate;
-      }
+ public void setSitesUserName(String sitesUserName) {
+  this.sitesUserName = sitesUserName;
+ }
 
-      public String getpName() {
-            return pName;
-      }
-      public void setpName(String pName) {
-            this.pName = pName;
-      }
-      public Integer getMembersId() {
-            return membersId;
-      }
+ public String getStaffName() {
+  return staffName;
+ }
 
-      public void setMembersId(Integer membersId) {
-            this.membersId = membersId;
-      }
+ public void setStaffName(String staffName) {
+  this.staffName = staffName;
+ }
 
-      public String getMembersName() {
-            return membersName;
-      }
+ public String getCreateDate() {
+  return createDate;
+ }
 
-      public void setMembersName(String membersName) {
-            this.membersName = membersName;
-      }
+ public void setCreateDate(String createDate) {
+  this.createDate = createDate;
+ }
 
+ public String getDuetoDate() {
+  return duetoDate;
+ }
+
+ public void setDuetoDate(String duetoDate) {
+  this.duetoDate = duetoDate;
+ }
+
+ public String getpName() {
+  return pName;
+ }
+
+ public void setpName(String pName) {
+  this.pName = pName;
+ }
+
+ public Integer getMid() {
+  return mid;
+ }
+
+ public void setMid(Integer mid) {
+  this.mid = mid;
+ }
+
+ public Integer getIds() {
+  return ids;
+ }
+
+ public void setIds(Integer ids) {
+  this.ids = ids;
+ }
+
+ public Integer getUid() {
+  return uid;
+ }
+
+ public void setUid(Integer uid) {
+  this.uid = uid;
+ }
 }

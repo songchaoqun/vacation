@@ -16,4 +16,7 @@ public interface MembersService {
 
     String saveMem(MemPacka me, HttpSession session);
 
+    Members queryBymId(Integer membersId);
+
+    void upMem(MemPacka me, HttpSession session);
 }

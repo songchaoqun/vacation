@@ -1,5 +1,5 @@
 package com.lyq.service;
-//dubbo
+//dubbo22
 public interface ProductService {
     String say();
 }

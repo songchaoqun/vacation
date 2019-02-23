@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,14 @@ public class SitesUserController {
     public void checkUser(Integer id){
         sitesUserService.checkUser(id);
     }
+
+    //员工登录
+    @ResponseBody
+    @RequestMapping("sitesUserLogin")
+    public String sitesUserLogin(SitesUser user, HttpSession session){
+        return sitesUserService.sitesUserLogin(user,session);
+    }
+
 
     //新增网站用户
     @ResponseBody
