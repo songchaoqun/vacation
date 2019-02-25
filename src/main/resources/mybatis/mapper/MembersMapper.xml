@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.MembersMapper" >
+    <!-- 查询总条数 -->
+    <select id="queryMemners" resultType="Long"  parameterType="com.lyq.model.MemPacka">
+        select count(*) from t_mempack
+    </select>
+
+    <!-- 查询用户会员总信息 -->
+    <select id="queryMemnersPage" resultType="com.lyq.model.Members" >
+         select
+         t.members_id   as  membersId,
+         t.members_name as   membersName,
+         s.sites_name   as   sitesName,
+         s.sites_User_Name as sitesUserName,
+         k.create_date  as   createDate,
+         k.dueto_date   as   duetoDate,
+         p.p_name       as    pName
+         from t_mem t ,t_sites_user s,t_mempack k,t_pa p
+         where s.id=k.uid
+         and   k.mid=t.members_id
+         and   t.members_id=p.members_id
+         limit #{start} ,#{rows}
+    </select>
+
+    <!-- 查询commbox下拉框 -->
+    <select id="queryMem" resultType="com.lyq.model.Members" >
+        select
+        t.members_Id as membersId,
+        t.members_Name as membersName
+         from t_mem t
+    </select>
+
+    <!-- 查询会员用户回显 -->
+    <select id="queryBymId" resultType="com.lyq.model.Members"  parameterType="com.lyq.model.Members"  >
+        select
+         t.members_id  as  membersId,
+         t.members_name as   membersName,
+         s.id  as id,
+         s.sites_name   as   sitesName,
+         s.sites_User_Name as sitesUserName,
+         k.mid   as  mid,
+         k.uid   as  uid,
+         k.ids    as  ids,
+         k.create_date  as   createDate,
+         k.dueto_date   as   duetoDate
+         from t_mem t ,t_sites_user s,t_mempack k
+         where s.id=k.uid
+         and   k.mid=t.members_id
+         and   t.members_id=#{membersId}
+    </select>
+
+    <!-- 查询用户会员 -->
+    <select id="queryMemPackByuid" resultType="com.lyq.model.MemPacka" parameterType="Integer" >
+        select
+        t.ids as ids,
+        t.mid as mid,
+        t.uid as uid,
+        t.create_date AS createDate,
+        t.dueto_date  as duetoDate
+         from t_mempack t
+         where
+         t.uid=#{uid}
+    </select>
+
+   <!-- 成为会员-->
+    <insert id="saveMem" parameterType="com.lyq.model.MemPacka">
+        insert into t_mempack
+        (ids,mid,uid,create_date,dueto_date)
+        values
+        (#{me.ids},#{me.mid},#{me.uid},SYSDATE(),#{me.duetoDate})
+    </insert>
+
+
+    <!--查询用户身份-->
+<!--    <select id="queryRoleId"  resultType="com.lyq.model.Members"  parameterType="Integer">
+
+
+
+    </select>-->
+
+ <update id="upMem"   >
+      update t_mempack
+     <set>
+         <if test="me.mid !=null ">
+           mid=#{me.mid},
+         </if>
+         <if test="me.uid !=null ">
+             uid=#{me.uid},
+         </if>
+         <if test="me.createDate !=null ">
+             create_Date=#{me.createDate},
+         </if>
+         <if test="me.duetoDate !=null ">
+             dueto_Date=#{me.duetoDate}
+         </if>
+     </set>
+ WHERE
+     ids =#{me.ids}
+</update>
+
+
+
+
+</mapper>

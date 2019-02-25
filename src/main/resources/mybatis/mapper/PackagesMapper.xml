@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--指定mapper位置-->
+<mapper namespace="com.lyq.mapper.PackagasMapper" >
+
+ <select id="queryPackages"  resultType="com.lyq.model.Packages">
+      select
+        t.members_Id as membersId,
+        t.members_Name as membersName,
+        p.p_Id as  pId,
+        p.p_name as pName,
+        p.price  as price
+         from t_pa p ,t_mem t
+        where
+        p.members_Id =t.members_Id
+ </select>
+
+</mapper>

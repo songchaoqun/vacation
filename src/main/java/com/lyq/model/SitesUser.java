@@ -19,6 +19,20 @@ public class SitesUser {
 
     private String sitesPhone; //手机号
 
+
+    private Integer  membersId;//会员Id
+
+    private Integer  status;//审核状态
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+
     @Transient
     private String verification;//验证码
 
@@ -79,4 +93,6 @@ public class SitesUser {
     public void setSitesUserName(String sitesUserName) {
         this.sitesUserName = sitesUserName;
     }
+
+
 }

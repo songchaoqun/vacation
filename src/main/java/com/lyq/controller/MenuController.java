@@ -20,128 +20,154 @@ public class MenuController {
 
     //跳转到报异常信息记录页面
     @RequestMapping("exceptionList")
-    public String exceptionList(){
+    public String exceptionList() {
         return "exception/exceptionList";
     }
 
     //跳转到报aop切面日志
     @RequestMapping("logList")
-    public String logList(){
+    public String logList() {
         return "log/logList";
     }
 
     //跳转到报表 柱
     @RequestMapping("pillar")
-    public String pillar(){
+    public String pillar() {
         return "reports/pillar";
     }
 
     //跳转到报表 饼
     @RequestMapping("reportsCake")
-    public String reportsCake(){
+    public String reportsCake() {
         return "reports/reportsCake";
     }
 
     //跳转到报表 折
     @RequestMapping("reportsPillar")
-    public String reportsPillar(){
+    public String reportsPillar() {
         return "reports/reportsPillar";
     }
+
     //跳转到报表 环
     @RequestMapping("circle")
-    public String circle(){
+    public String circle() {
         return "reports/circle";
     }
 
     //跳转到轮播图
     @RequestMapping("imgList")
-    public String imgList(){
+    public String imgList() {
         return "img/imgList";
     }
 
     //跳转到报表 阴影
     @RequestMapping("funnel")
-    public String lineChart(){
+    public String lineChart() {
         return "reports/lineChart";
     }
 
     //跳转到答案页面
     @RequestMapping("answerList")
-    public String answerList(Integer id, Model model){
-        model.addAttribute("problem",id);
+    public String answerList(Integer id, Model model) {
+        model.addAttribute("problem", id);
         return "answer/answerList";
     }
 
+
     //跳转到问题页面
     @RequestMapping("problemList")
-    public String problemList(){
+    public String problemList() {
         return "problem/problemList";
     }
 
     //跳转到评论页面
     @RequestMapping("commentList")
-    public String commentList(){
+    public String commentList() {
         return "comment/commentList";
+    }
+
+    //跳转到任务页面
+    @RequestMapping("toTask")
+    public String toTask() {
+        return "task/task";
     }
 
     //跳转到用户回收站
     @RequestMapping("recycle")
-    public String recycle(){
+    public String recycle() {
         return "sitesUser/recycle";
     }
 
     //跳转到网站用户管理页面
     @RequestMapping("sitesUserList")
-    public String sitesUserList(){
+    public String sitesUserList() {
         return "sitesUser/sitesUserList";
     }
 
     //跳转到目录管理页面
     @RequestMapping("catalogList")
-    public String catalogList(){
+    public String catalogList() {
         return "catalog/catalogList";
+    }
+
+    //跳转到用户审核页面
+    @RequestMapping("toCheck")
+    public String toCheck() {
+        return "sitesUser/checkUser";
     }
 
     //跳转到课程管理页面
     @RequestMapping("courseList")
-    public String courseList(){
+    public String courseList() {
         return "course/courseList";
     }
 
     //跳转到类型管理页面
     @RequestMapping("moldList")
-    public String moldList(){
+    public String moldList() {
         return "mold/moldList";
     }
 
     //跳转到main页面
     @RequestMapping("main")
-    public String main(){
+    public String main() {
         return "main";
     }
 
     //跳转到staffList员工页面
     @RequestMapping("staffList")
-    public String staffList(){
+    public String staffList() {
         return "staff/staffList";
     }
 
     //跳转到员工角色页面
     @RequestMapping("staffRoleList")
-    public String staffRoleList(){
+    public String staffRoleList() {
         return "role/staffRoleList";
     }
 
+
     //跳转到广告页面
     @RequestMapping("advertising")
-    public String advertising(){
+    public String advertising() {
         return "advertising/advertising";
     }
 
     //跳转到新闻页面
     @RequestMapping("news")
-    public String news(){
+    public String news() {
         return "news/news";
+    }
+    //跳转到会员管理页面
+    @RequestMapping("toMemList")
+    public String toMemList () {
+        return "mem/membersList";
+    }
+    //跳转到套餐详细查看页面
+    @RequestMapping("toPaList")
+    public String toPaList () {
+        return "pack/packagesList";
+
     }
 
     /**
@@ -149,7 +175,7 @@ public class MenuController {
      * 生成验证码
      */
     @RequestMapping("verificationCode")
-    public void getVerify(HttpServletRequest request, HttpServletResponse response){
+    public void getVerify (HttpServletRequest request, HttpServletResponse response){
         try {
             response.setContentType("image/jpeg");//设置相应类型,告诉浏览器输出的内容为图片
             response.setHeader("Pragma", "No-cache");//设置响应头信息，告诉浏览器不要缓存此内容
@@ -164,3 +190,4 @@ public class MenuController {
     }
 
 }
+
