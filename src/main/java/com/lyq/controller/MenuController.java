@@ -132,6 +132,18 @@ public class MenuController {
         return "role/staffRoleList";
     }
 
+    //跳转到广告页面
+    @RequestMapping("advertising")
+    public String advertising(){
+        return "advertising/advertising";
+    }
+
+    //跳转到新闻页面
+    @RequestMapping("news")
+    public String news(){
+        return "news/news";
+    }
+
     /**
      * 前台获取验证码
      * 生成验证码

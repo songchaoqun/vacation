@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lyq.mapper.NewsMapper">
+    <!--查询新闻总条数-->
+    <select id="queryNewsTotal" resultType="long" >
+        select count(*) from t_news
+    </select>
+    <!--查询新闻-->
+    <select id="queryNews" resultType="com.lyq.model.News">
+        select n.id,n.title,n.content,s.staff_name staffName,n.type,n.create_time createTime from t_news n left join t_staff s on n.create_user = s.id limit #{start},#{rows}
+    </select>
+    <!--查询用户-->
+    <select id="queryUser" resultType="com.lyq.model.Staff">
+        select s.id,s.staff_name staffName from t_staff s
+    </select>
+    <!--回显-->
+    <select id="queryById" resultType="com.lyq.model.News" parameterType="int">
+        select n.* ,n.create_user createUser,n.create_time createTime from t_news n where n.id=#{id}
+    </select>
+    <!--新增新闻-->
+    <insert id="saveNews" parameterType="com.lyq.model.News">
+        insert into t_news(title,content,create_user,type,create_time) values(#{title},#{content},#{createUser},#{type},SYSDATE())
+    </insert>
+    <!--修改-->
+    <update id="updateNews"  parameterType="com.lyq.model.News">
+        update t_news n set n.title=#{title},n.content=#{content},n.create_user=#{createUser},n.type=#{type},n.create_time = SYSDATE() where n.id = #{id}
+    </update>
+    <!--删除-->
+    <delete id="deleteNews" parameterType="int">
+        delete from t_news  where id = #{id}
+    </delete>
+</mapper>

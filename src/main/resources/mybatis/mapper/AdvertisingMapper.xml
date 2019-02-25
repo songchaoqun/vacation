@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lyq.mapper.AdvertisingMapper">
+    <!--查询广告总条数-->
+    <select id="queryAdvertisingTotal" resultType="long">
+       select count(*) from t_advertising
+    </select>
+    <!--查询广告-->
+    <select id="queryAdvertising" resultType="com.lyq.model.Advertising">
+        select a.id,a.name,a.img,a.href,a.slogan,a.creat_time creatTime,a.people from t_advertising a limit #{start},#{rows}
+    </select>
+    <!--回显-->
+    <select id="queryById" resultType="com.lyq.model.Advertising" parameterType="int">
+        select a.* ,a.creat_time creatTime from t_advertising a where a.id=#{id}
+    </select>
+    <!--新增广告-->
+    <insert id="saveAdvertising" parameterType="com.lyq.model.Advertising">
+        insert into t_advertising(name,img,href,slogan,creat_time,people) values(#{name},#{img},#{href},#{slogan},SYSDATE(),#{people})
+    </insert>
+    <!--修改-->
+    <update id="updateAdvertising"  parameterType="com.lyq.model.Advertising">
+        update t_advertising a set a.name=#{name},a.img=#{img},a.href=#{href},a.slogan=#{slogan},a.creat_time = SYSDATE(),a.people = #{people} where id = #{id}
+    </update>
+    <!--删除-->
+    <delete id="deleteAd" parameterType="int">
+        delete from t_advertising  where id = #{id}
+    </delete>
+</mapper>
