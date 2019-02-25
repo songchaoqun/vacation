@@ -19,7 +19,7 @@ public class SitesUser {
 
     private String sitesPhone; //手机号
 
-<<<<<<< HEAD
+
     private Integer  membersId;//会员Id
 
     private Integer  status;//审核状态
@@ -32,8 +32,7 @@ public class SitesUser {
         this.status = status;
     }
 
-=======
->>>>>>> origin/master
+
     @Transient
     private String verification;//验证码
 

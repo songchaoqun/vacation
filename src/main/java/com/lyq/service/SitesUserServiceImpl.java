@@ -5,7 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.lyq.mapper.SitesUserMapper;
 import com.lyq.model.Mold;
 import com.lyq.model.SitesUser;
-<<<<<<< HEAD
+
 import com.lyq.utils.CommonCanstant;
 import com.lyq.utils.HttpClientUtil;
 import com.lyq.utils.MD5Util;
@@ -14,13 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-=======
+
 import com.lyq.model.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
->>>>>>> origin/master
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +76,7 @@ public class SitesUserServiceImpl implements SitesUserService{
         return sitesUserMapper.querySitesUser();
     }
 
-<<<<<<< HEAD
+
     @Override
     public List<SitesUser> queryCheckUser() {
         return sitesUserMapper.queryCheckUser();
@@ -110,7 +110,7 @@ public class SitesUserServiceImpl implements SitesUserService{
     }
 
 
-=======
+
 
 
     public static final String RANDOMCODEKEY = "RANDOMVALIDATECODEKEY";//放到session中的key
@@ -135,5 +135,5 @@ public class SitesUserServiceImpl implements SitesUserService{
         return "3";
     }
 
->>>>>>> origin/master
+
 }
